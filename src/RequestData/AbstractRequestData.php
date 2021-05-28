@@ -49,13 +49,16 @@ abstract class AbstractRequestData implements RequestDataInterface
         ));
     }
 
+    public function has(string $key): bool
+    {
+        return array_key_exists($key, $this->parameters);
+    }
+
     public function get(string $key)
     {
-        if (array_key_exists($key, $this->parameters)) {
-            return $this->parameters[$key];
-        }
-
-        return null;
+        return $this->has($key)
+            ? $this->parameters[$key]
+            : null;
     }
 
     public function all(): array

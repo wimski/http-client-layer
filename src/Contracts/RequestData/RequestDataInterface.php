@@ -36,6 +36,8 @@ interface RequestDataInterface
      */
     public function merge(...$requestData);
 
+    public function has(string $key): bool;
+
     /**
      * @param string $key
      * @return mixed|null
