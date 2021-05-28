@@ -13,6 +13,8 @@ use Wimski\HttpClient\Enums\HttpRequestMethodEnum;
 
 interface HttpClientInterface
 {
+    public function setDefaultHeaders(HeaderRequestDataInterface $headers): HttpClientInterface;
+
     /**
      * @param HttpRequestMethodEnum           $method
      * @param string                          $uri

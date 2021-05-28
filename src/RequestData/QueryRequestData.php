@@ -8,8 +8,4 @@ use Wimski\HttpClient\Contracts\RequestData\QueryRequestDataInterface;
 
 class QueryRequestData extends AbstractRequestData implements QueryRequestDataInterface
 {
-    public static function make(array $parameters = null): QueryRequestDataInterface
-    {
-        return new self($parameters);
-    }
 }

@@ -12,6 +12,12 @@ interface RequestDataInterface
     public function __construct(array $parameters = null);
 
     /**
+     * @var array<string, mixed> $parameters
+     * @return RequestDataInterface
+     */
+    public static function make(array $parameters = null);
+
+    /**
      * @param string $key
      * @param mixed  $value
      * @return RequestDataInterface
@@ -23,6 +29,12 @@ interface RequestDataInterface
      * @return RequestDataInterface
      */
     public function set(array $parameters);
+
+    /**
+     * @param RequestDataInterface ...$requestData
+     * @return RequestDataInterface
+     */
+    public function merge(...$requestData);
 
     /**
      * @param string $key

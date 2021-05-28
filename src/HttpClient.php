@@ -16,6 +16,7 @@ use Wimski\HttpClient\Contracts\RequestData\BodyRequestDataInterface;
 use Wimski\HttpClient\Contracts\RequestData\HeaderRequestDataInterface;
 use Wimski\HttpClient\Contracts\RequestData\QueryRequestDataInterface;
 use Wimski\HttpClient\Enums\HttpRequestMethodEnum;
+use Wimski\HttpClient\RequestData\HeaderRequestData;
 
 class HttpClient implements HttpClientInterface
 {
@@ -23,6 +24,7 @@ class HttpClient implements HttpClientInterface
     protected UriFactoryInterface $uriFactory;
     protected RequestFactoryInterface $requestFactory;
     protected StreamFactoryInterface $streamFactory;
+    protected HeaderRequestDataInterface $defaultHeaders;
 
     public function __construct(
         ClientInterface $client,
@@ -34,6 +36,15 @@ class HttpClient implements HttpClientInterface
         $this->uriFactory     = $uriFactory;
         $this->requestFactory = $requestFactory;
         $this->streamFactory  = $streamFactory;
+
+        $this->defaultHeaders = new HeaderRequestData();
+    }
+
+    public function setDefaultHeaders(HeaderRequestDataInterface $headers): HttpClientInterface
+    {
+        $this->defaultHeaders = $headers;
+
+        return $this;
     }
 
     public function request(
@@ -129,8 +140,10 @@ class HttpClient implements HttpClientInterface
         RequestInterface $request,
         HeaderRequestDataInterface $headers = null
     ): RequestInterface {
-        if (! $headers) {
-            return $request;
+        if ($headers) {
+            $headers = $this->defaultHeaders->merge($headers);
+        } else {
+            $headers = $this->defaultHeaders;
         }
 
         foreach ($headers->all() as $name => $value) {

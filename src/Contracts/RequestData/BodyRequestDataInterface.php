@@ -10,7 +10,7 @@ interface BodyRequestDataInterface extends RequestDataInterface
      * @var array<string, mixed> $parameters
      * @return BodyRequestDataInterface
      */
-    public static function make(array $parameters = null): BodyRequestDataInterface;
+    public static function make(array $parameters = null);
 
     /**
      * @param string $key
@@ -24,4 +24,10 @@ interface BodyRequestDataInterface extends RequestDataInterface
      * @return BodyRequestDataInterface
      */
     public function set(array $parameters);
+
+    /**
+     * @param BodyRequestDataInterface ...$requestData
+     * @return BodyRequestDataInterface
+     */
+    public function merge(...$requestData);
 }

@@ -10,7 +10,7 @@ interface HeaderRequestDataInterface extends RequestDataInterface
      * @var array<string, mixed> $parameters
      * @return HeaderRequestDataInterface
      */
-    public static function make(array $parameters = null): HeaderRequestDataInterface;
+    public static function make(array $parameters = null);
 
     /**
      * @param string $key
@@ -24,4 +24,10 @@ interface HeaderRequestDataInterface extends RequestDataInterface
      * @return HeaderRequestDataInterface
      */
     public function set(array $parameters);
+
+    /**
+     * @param HeaderRequestDataInterface ...$requestData
+     * @return HeaderRequestDataInterface
+     */
+    public function merge(...$requestData);
 }

@@ -10,7 +10,7 @@ interface QueryRequestDataInterface extends RequestDataInterface
      * @var array<string, mixed> $parameters
      * @return QueryRequestDataInterface
      */
-    public static function make(array $parameters = null): QueryRequestDataInterface;
+    public static function make(array $parameters = null);
 
     /**
      * @param string $key
@@ -24,4 +24,10 @@ interface QueryRequestDataInterface extends RequestDataInterface
      * @return QueryRequestDataInterface
      */
     public function set(array $parameters);
+
+    /**
+     * @param QueryRequestDataInterface ...$requestData
+     * @return QueryRequestDataInterface
+     */
+    public function merge(...$requestData);
 }

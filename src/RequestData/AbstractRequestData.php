@@ -18,6 +18,11 @@ abstract class AbstractRequestData implements RequestDataInterface
         $this->parameters = $parameters ?? [];
     }
 
+    public static function make(array $parameters = null)
+    {
+        return new static($parameters);
+    }
+
     public function add(string $key, $value)
     {
         $this->parameters[$key] = $value;
@@ -30,6 +35,18 @@ abstract class AbstractRequestData implements RequestDataInterface
         $this->parameters = $parameters;
 
         return $this;
+    }
+
+    public function merge(...$requestData)
+    {
+        $data = array_map(function (RequestDataInterface $requestData): array {
+            return $requestData->all();
+        }, $requestData);
+
+        return static::make(array_merge_recursive(
+            $this->all(),
+            ...$data,
+        ));
     }
 
     public function get(string $key)
