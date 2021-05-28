@@ -1,0 +1,21 @@
+{
+    "name": "wimski/http-client-layer",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "myclabs/php-enum": "^1.8",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Wimski\\HttpClient\\": "src"
+        }
+    }
+}
