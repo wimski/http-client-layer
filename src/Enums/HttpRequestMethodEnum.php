@@ -7,10 +7,11 @@ namespace Wimski\HttpClient\Enums;
 use MyCLabs\Enum\Enum;
 
 /**
- * @method static static DELETE()
- * @method static static GET()
- * @method static static POST()
- * @method static static PUT()
+ * @extends Enum<string>
+ * @method static self DELETE()
+ * @method static self GET()
+ * @method static self POST()
+ * @method static self PUT()
  */
 class HttpRequestMethodEnum extends Enum
 {

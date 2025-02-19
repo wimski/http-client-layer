@@ -4,87 +4,88 @@ declare(strict_types=1);
 
 namespace Wimski\HttpClient\Contracts;
 
-use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
-use Wimski\HttpClient\Contracts\RequestData\BodyRequestDataInterface;
-use Wimski\HttpClient\Contracts\RequestData\HeaderRequestDataInterface;
-use Wimski\HttpClient\Contracts\RequestData\QueryRequestDataInterface;
+use Wimski\HttpClient\Contracts\RequestData\RequestBodyDataInterface;
+use Wimski\HttpClient\Contracts\RequestData\RequestHeaderDataInterface;
+use Wimski\HttpClient\Contracts\RequestData\RequestQueryDataInterface;
 use Wimski\HttpClient\Enums\HttpRequestMethodEnum;
 
 interface HttpClientInterface
 {
-    public function setDefaultHeaders(HeaderRequestDataInterface $headers): HttpClientInterface;
+    public function setBaseUri(string $baseUri): HttpClientInterface;
+    public function setDefaultHeaders(RequestHeaderDataInterface $headers): HttpClientInterface;
 
     /**
      * @param HttpRequestMethodEnum           $method
      * @param string                          $uri
-     * @param BodyRequestDataInterface|null   $body
-     * @param QueryRequestDataInterface|null  $query
-     * @param HeaderRequestDataInterface|null $headers
+     * @param RequestBodyDataInterface|null   $body
+     * @param RequestQueryDataInterface|null  $query
+     * @param RequestHeaderDataInterface|null $headers
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws RequestExceptionInterface
      */
     public function request(
         HttpRequestMethodEnum $method,
         string $uri,
-        BodyRequestDataInterface $body = null,
-        QueryRequestDataInterface $query = null,
-        HeaderRequestDataInterface $headers = null
+        ?RequestBodyDataInterface $body = null,
+        ?RequestQueryDataInterface $query = null,
+        ?RequestHeaderDataInterface $headers = null,
     ): ResponseInterface;
 
     /**
      * @param string                          $uri
-     * @param QueryRequestDataInterface|null  $query
-     * @param HeaderRequestDataInterface|null $headers
+     * @param RequestQueryDataInterface|null  $query
+     * @param RequestHeaderDataInterface|null $headers
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws RequestExceptionInterface
      */
     public function get(
         string $uri,
-        QueryRequestDataInterface $query = null,
-        HeaderRequestDataInterface $headers = null
+        ?RequestQueryDataInterface $query = null,
+        ?RequestHeaderDataInterface $headers = null,
     ): ResponseInterface;
 
     /**
      * @param string                          $uri
-     * @param BodyRequestDataInterface        $body
-     * @param QueryRequestDataInterface|null  $query
-     * @param HeaderRequestDataInterface|null $headers
+     * @param RequestBodyDataInterface        $body
+     * @param RequestQueryDataInterface|null  $query
+     * @param RequestHeaderDataInterface|null $headers
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws RequestExceptionInterface
      */
     public function post(
         string $uri,
-        BodyRequestDataInterface $body,
-        QueryRequestDataInterface $query = null,
-        HeaderRequestDataInterface $headers = null
+        RequestBodyDataInterface $body,
+        ?RequestQueryDataInterface $query = null,
+        ?RequestHeaderDataInterface $headers = null,
     ): ResponseInterface;
 
     /**
      * @param string                          $uri
-     * @param BodyRequestDataInterface        $body
-     * @param QueryRequestDataInterface|null  $query
-     * @param HeaderRequestDataInterface|null $headers
+     * @param RequestBodyDataInterface        $body
+     * @param RequestQueryDataInterface|null  $query
+     * @param RequestHeaderDataInterface|null $headers
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws RequestExceptionInterface
      */
     public function put(
         string $uri,
-        BodyRequestDataInterface $body,
-        QueryRequestDataInterface $query = null,
-        HeaderRequestDataInterface $headers = null
+        RequestBodyDataInterface $body,
+        ?RequestQueryDataInterface $query = null,
+        ?RequestHeaderDataInterface $headers = null,
     ): ResponseInterface;
 
     /**
      * @param string                          $uri
-     * @param QueryRequestDataInterface|null  $query
-     * @param HeaderRequestDataInterface|null $headers
+     * @param RequestQueryDataInterface|null  $query
+     * @param RequestHeaderDataInterface|null $headers
      * @return ResponseInterface
-     * @throws ClientExceptionInterface
+     * @throws RequestExceptionInterface
      */
     public function delete(
         string $uri,
-        QueryRequestDataInterface $query = null,
-        HeaderRequestDataInterface $headers = null
+        ?RequestQueryDataInterface $query = null,
+        ?RequestHeaderDataInterface $headers = null,
     ): ResponseInterface;
 }
